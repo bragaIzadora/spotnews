@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário para Nova Notícia</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <ul class="header-links">
+            <li><a href="{% url 'home-page' %}">Home</a></li>
+            <li><a href="{% url 'categories-form' %}">Cadastrar Categorias</a></li>
+            <li><a href="{% url 'news-form' %}">Cadastrar Notícias</a></li>
+        </ul>
+    </header>
+
+    <h1>Formulário para Nova Notícia</h1>
+
+    <form method="post" action="{% url 'news-form' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="id_title">Título</label>
+        <input type="text" id="id_title" name="title" required>
+
+        <label for="id_content">Conteúdo</label>
+        <textarea id="id_content" name="content" required></textarea>
+
+        <label for="id_author">Autoria</label>
+        <select id="id_author" name="author" required>
+            {% for author in authors %}
+                <option value="{{ author.id }}">{{ author.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="id_created_at">Criado em</label>
+        <input type="date" id="id_created_at" name="created_at" required>
+
+        <label for="id_image">URL da Imagem</label>
+        <input type="file" id="id_image" name="image">
+
+        <label>Categorias</label>
+        {% for category in categories %}
+            <div>
+                <input type="checkbox" id="id_category_{{ category.id }}" name="categories" value="{{ category.id }}">
+                <label for="id_category_{{ category.id }}">{{ category.name }}</label>
+            </div>
+        {% endfor %}
+
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

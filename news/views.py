@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from news.models import News
-from .forms import CategoryForm  # Importe o formulário
+from .forms import CategoryForm
 
 
 def index(request):
