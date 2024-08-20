@@ -12,3 +12,14 @@ class CategoryForm(forms.ModelForm):
                 'required': 'required'
             })
         }
+
+
+# class NewsForm(forms.ModelForm):
+#     class Meta:
+#         model = News
+#         fields = ['title', 'content', 'author', 'created_at',
+# 'image', 'categories']
+#         widgets = {
+#             'categories': forms.CheckboxSelectMultiple(),
+#             'author': forms.Select()
+#         }

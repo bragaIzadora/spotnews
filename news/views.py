@@ -23,3 +23,20 @@ def category_form(request):
         form = CategoryForm()
 
     return render(request, 'categories_form.html', {'form': form})
+
+
+# def news_form(request):
+#     if request.method == 'POST':
+#         form = NewsForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             news = form.save()
+#             return redirect('home-page')
+#     else:
+#         form = NewsForm()
+#     context = {
+#         'form': form,
+#         'authors': User.objects.all(),
+#         'categories': Category.objects.all()
+#     }
+
+#     return render(request, 'news_form.html', context)
