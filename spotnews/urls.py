@@ -19,10 +19,13 @@ from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from news.views import index, news_details, category_form, news_form, CategoryViewSet
+from news.views import index, news_details, category_form, news_form
+from news.views import CategoryViewSet, UserViewSet
+
 
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet)
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
