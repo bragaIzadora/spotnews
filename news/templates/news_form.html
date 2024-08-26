@@ -1,12 +1,9 @@
-{% load static %}
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário para Nova Notícia</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <header class="header">
@@ -16,36 +13,32 @@
             <li><a href="{% url 'news-form' %}">Cadastrar Notícias</a></li>
         </ul>
     </header>
-
     <h1>Formulário para Nova Notícia</h1>
-
     <form method="post" action="{% url 'news-form' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="id_title">Título</label>
-        <input type="text" id="id_title" name="title" required>
+        <label for="id_title">Título:</label>
+        <input type="text" name="title" required><br><br>
 
-        <label for="id_content">Conteúdo</label>
-        <textarea id="id_content" name="content" required></textarea>
+        <label for="id_content">Conteúdo:</label>
+        <textarea name="content" required></textarea><br><br>
 
-        <label for="id_author">Autoria</label>
-        <select id="id_author" name="author" required>
-            {% for author in authors %}
-                <option value="{{ author.id }}">{{ author.name }}</option>
+        <label for="id_author">Autoria:</label>
+        <select name="author" id="id_author" required>
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.name }}</option>
             {% endfor %}
-        </select>
+        </select><br><br>
 
-        <label for="id_created_at">Criado em</label>
-        <input type="date" id="id_created_at" name="created_at" required>
+        <label for="id_created_at">Criado em:</label>
+        <input type="date" name="created_at" required><br><br>
 
-        <label for="id_image">URL da Imagem</label>
-        <input type="file" id="id_image" name="image">
+        <label for="id_image">URL da Imagem:</label>
+        <input type="file" name="image"><br><br>
 
-        <label>Categorias</label>
+        <p>Categorias:</p>
         {% for category in categories %}
-            <div>
-                <input type="checkbox" id="id_category_{{ category.id }}" name="categories" value="{{ category.id }}">
-                <label for="id_category_{{ category.id }}">{{ category.name }}</label>
-            </div>
+            <label for="id_categories_{{ category.id }}">{{ category.name }}</label>
+            <input type="checkbox" name="categories" value="{{ category.id }}"><br>
         {% endfor %}
 
         <button type="submit">Salvar</button>

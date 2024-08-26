@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category
+from .models import Category, News
 
 
 class CategoryForm(forms.ModelForm):
@@ -14,12 +14,16 @@ class CategoryForm(forms.ModelForm):
         }
 
 
-# class NewsForm(forms.ModelForm):
-#     class Meta:
-#         model = News
-#         fields = ['title', 'content', 'author', 'created_at',
-# 'image', 'categories']
-#         widgets = {
-#             'categories': forms.CheckboxSelectMultiple(),
-#             'author': forms.Select()
-#         }
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = ['title', 'content',
+                  'author', 'created_at', 'image', 'categories']
+        widgets = {
+            'title': forms
+            .TextInput(attrs={'maxlength': '200', 'required': 'required'}),
+            'content': forms
+            .Textarea(attrs={'required': 'required'}),
+            'created_at': forms
+            .DateInput(attrs={'type': 'date', 'required': 'required'}),
+        }
